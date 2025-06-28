@@ -1,25 +1,29 @@
 import React, { useContext } from "react";
 
-import { AuthContext } from "./App";
+import { AuthContext } from "../context/AuthContext";
 
-const Auth = ({setCheckData}) => {
-  const checkData = useContext(AuthContext);
+const Auth = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  // const checkData = useContext(AuthContext);
+   const handleCheckboxChange = (e) => {
+    setIsAuthenticated(e.target.checked);
+  };
   return (
     <div>
       <div>
-        {checkData ? (
+        {isAuthenticated ? (
           <p>You are now authenticated, you can proceed</p>
         ) : (
-          <p>You are not authenticated</p>
+          <p>you are not authenticated</p>
         )}
       </div>
       <input
         id="inp"
         type="checkbox"
-        checked={checkData}
-        onChange={() => setCheckData(!checkData)}
+        checked={isAuthenticated}
+        onChange={handleCheckboxChange}
       />{" "}
-      <label htmlFor='inp'>I am not a robot</label>
+      <label htmlFor='inp'>I'm not a robot</label>
       
     </div>
   );
